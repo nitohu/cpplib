@@ -106,7 +106,7 @@ public:
         }
     }
 
-    int at(int i) {
+    int at(unsigned int i) {
         if (i > this->size) {
             throw std::out_of_range("Index out of range.");
         }
@@ -126,7 +126,7 @@ public:
     }
     int get_length() { return this->size; }
 
-    int operator [](int i) {
+    int operator [](unsigned int i) {
         return this->at(i);
     }
 private:
