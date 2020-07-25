@@ -70,6 +70,42 @@ public:
         this->size--;
     }
 
+    void cut(unsigned int x, unsigned int y) {
+        if (x > this->get_length() || y > this->get_length()) {
+            throw "x or y is out of range.";
+        }
+        if (this->get_length() < 2) {
+            throw "Length must be bigger than 2.";
+        }
+        if (x > y) {
+            throw "x must be smaller than y.";
+        }
+        IntArrayElement *e = this->head;
+        for (unsigned int i = 0; i < y; i++) {
+            if (i >= x) {
+                // Reference next object to previous or to head if no previous exists
+                // Reference previous object to next or to tail if next doesn't exist
+                // Delete current element
+                IntArrayElement *prev = e->prev;
+                IntArrayElement *next = e->next;
+                if (prev == nullptr) {
+                    this->head = next;
+                } else {
+                    prev->next = next;
+                }
+                if (next == nullptr) {
+                    this->tail = prev;
+                } else {
+                    next->prev = prev;
+                }
+                delete e;
+                e = (prev == nullptr) ? next : prev;
+                this->size--;
+            }
+            e = e->next;
+        }
+    }
+
     int at(int i) {
         if (i > this->size) {
             throw std::out_of_range("Index out of range.");

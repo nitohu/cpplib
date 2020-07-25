@@ -20,4 +20,8 @@ int main() {
     a->pop();
     printIntArr(a);
     std::cout << "2nd item: " << (*a)[1] << std::endl;
+    std::cout << a << std::endl;
+    a->cut(0, 1);
+    a->cut(a->get_length()-2, a->get_length());
+    std::cout << a << std::endl;
 }
