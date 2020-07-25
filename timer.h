@@ -12,6 +12,7 @@
 #include <stdio.h>
 #include <thread>
 
+namespace nitohu {
 class Timer {
     
 private:
@@ -34,5 +35,6 @@ public:
     int getDuration();
     
 };
+}
 
 #endif /* timer_hpp */

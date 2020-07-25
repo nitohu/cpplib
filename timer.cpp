@@ -11,13 +11,13 @@
 #include <future>
 #include <chrono>
 
-Timer::Timer(int duration) {
+nitohu::Timer::Timer(int duration) {
     
     this->setDuration(duration);
     
 }
 
-void Timer::startTimer() {
+void nitohu::Timer::startTimer() {
     
     this->running = true;
     
@@ -26,7 +26,7 @@ void Timer::startTimer() {
     
 }
 
-void Timer::timer(int duration, bool *running) {
+void nitohu::Timer::timer(int duration, bool *running) {
     
     std::this_thread::sleep_for(std::chrono::seconds(duration));
     
@@ -34,14 +34,14 @@ void Timer::timer(int duration, bool *running) {
     
 }
 
-bool Timer::finished() {
+bool nitohu::Timer::finished() {
     return !this->running;
 }
 
-void Timer::setDuration(int d) {
+void nitohu::Timer::setDuration(int d) {
     this->duration = d;
 }
 
-int Timer::getDuration() {
+int nitohu::Timer::getDuration() {
     return this->duration;
 }

@@ -4,7 +4,7 @@
 #include "datatype.h"
 #include "timer.h"
 
-void printIntArr(IntArray *x) {
+void printIntArr(nitohu::IntArray *x) {
     std::cout << "length: " << x->get_length() << std::endl;
     for (int i = 0; i < x->get_length(); i++) {
         std::cout << i << " " << x->at(i) << std::endl;
@@ -13,7 +13,7 @@ void printIntArr(IntArray *x) {
 
 int main() {
     // Datatype
-    IntArray *a = new IntArray{1, 2, 3, 4, 5, 6};
+    nitohu::IntArray *a = new nitohu::IntArray{1, 2, 3, 4, 5, 6};
     a->prepend(10);
     a->prepend(20);
     printIntArr(a);
@@ -28,7 +28,7 @@ int main() {
     std::cout << a << std::endl;
 
     // Timer
-    Timer t = Timer(5);
+    nitohu::Timer t = nitohu::Timer(5);
     t.startTimer();
     int ld = 0;
     while (!t.finished()) {

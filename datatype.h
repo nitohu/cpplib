@@ -10,6 +10,7 @@
 #include <initializer_list>
 #include <string>
 
+namespace nitohu {
 class IntArrayElement  {
 public:
     IntArrayElement() {}
@@ -150,4 +151,5 @@ std::ostream& operator<<(std::ostream& o, IntArray *a) {
     }
     o << "}";
     return o;
+}
 }
