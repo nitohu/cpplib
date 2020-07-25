@@ -83,9 +83,6 @@ public:
         IntArrayElement *e = this->head;
         for (unsigned int i = 0; i < y; i++) {
             if (i >= x) {
-                // Reference next object to previous or to head if no previous exists
-                // Reference previous object to next or to tail if next doesn't exist
-                // Delete current element
                 IntArrayElement *prev = e->prev;
                 IntArrayElement *next = e->next;
                 if (prev == nullptr) {
