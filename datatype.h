@@ -93,23 +93,20 @@ public:
     int operator [](int i) {
         return this->at(i);
     }
-
-    std::ostream& operator <<(std::ostream& o) {
-        std::string s = "{";
-        for(int i = 0; i < this->get_length(); i++) {
-            s += std::to_string(s.at(i));
-            if (i < (this->get_length()-1)) {
-                s += ",";
-            }
-        }
-        s += "}";
-        std::cout << s << std::endl;
-        o << s;
-        return o;
-    }
 private:
     IntArrayElement *head = nullptr;
     IntArrayElement *tail = nullptr;
     int size = 0;
 };
 
+std::ostream& operator<<(std::ostream& o, IntArray *a) {
+    o << "{";
+    for(int i = 0; i < a->get_length(); i++) {
+        o << a->at(i);
+        if (i < (a->get_length()-1)) {
+            o << ",";
+        }
+    }
+    o << "}";
+    return o;
+}

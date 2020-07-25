@@ -15,6 +15,7 @@ int main() {
     a->prepend(10);
     a->prepend(20);
     printIntArr(a);
+    std::cout << a << std::endl;
     a->pop();
     a->pop();
     printIntArr(a);
