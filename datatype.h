@@ -1,3 +1,11 @@
+//
+//  datatype.h
+//  cpplib
+//
+//  Created by Niklas Tom Hucke on 24.07.2020.
+//  Copyright © 2019 Niklas Tom Hucke. All rights reserved.
+//
+
 #include <stdexcept>
 #include <initializer_list>
 #include <string>
