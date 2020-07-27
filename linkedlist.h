@@ -22,6 +22,20 @@ public:
         this->value = x;
     }
 
+    LLElem<T>* operator++(int) {
+        return this->next;
+    }
+    LLElem<T>* operator++() {
+        return this->next;
+    }
+
+    LLElem<T>* operator--(int) {
+        return this->prev;
+    }
+    LLElem<T>* operator--() {
+        return this->prev;
+    }
+
     T value;
     LLElem<T> *next = nullptr;
     LLElem<T> *prev = nullptr;
@@ -54,7 +68,6 @@ public:
         this->head = e;
         this->size++;
     }
-
     void append(int x) {
         LLElem<T> *e = new LLElem<T>(x);
         if (this->head == nullptr) {
@@ -83,7 +96,6 @@ public:
         }
         this->size--;
     }
-
     void cut(size_t x, size_t y) {
         if (x > this->get_length() || y > this->get_length()) {
             throw "x or y is out of range.";
@@ -137,7 +149,7 @@ public:
     }
     size_t get_length() const { return this->size; }
 
-    T operator [](size_t i) const {
+    T operator[](size_t i) const {
         return this->at(i);
     }
 
