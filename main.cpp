@@ -1,37 +1,37 @@
 #include <iostream>
 #include <vector>
 
-#include "datatype.h"
+#include "linkedlist.h"
 #include "timer.h"
 
-void printIntArr(nitohu::IntArray *x) {
-    std::cout << "length: " << x->get_length() << std::endl;
-    for (int i = 0; i < x->get_length(); i++) {
-        std::cout << i << " " << x->at(i) << std::endl;
-    }
-}
-
 int main() {
+    using namespace nitohu;
     // Datatype
-    nitohu::IntArray *a = new nitohu::IntArray{1, 2, 3, 4, 5, 6};
+    LinkedList<int> *a = new LinkedList<int>{1, 2, 3, 4, 5, 6};
+    LinkedList<double> b = LinkedList<double>{0.0, 1.0, 4.0, 9.0, 16.0};
     a->prepend(10);
     a->prepend(20);
-    printIntArr(a);
+
     std::cout << a << std::endl;
+    std::cout << b << std::endl;
     a->pop();
     a->pop();
-    printIntArr(a);
+
+    std::cout << a << std::endl;
     std::cout << "2nd item: " << (*a)[1] << std::endl;
-    std::cout << a << std::endl;
+
     a->cut(0, 1);
     a->cut(a->get_length()-2, a->get_length());
+
     std::cout << a << std::endl;
 
     // Timer
-    nitohu::Timer t = nitohu::Timer(5);
-    t.startTimer();
-    int ld = 0;
-    while (!t.finished()) {
-    }
-    std::cout << "Timer has passed" << std::endl;
+    // nitohu::Timer t = nitohu::Timer(5);
+    // t.startTimer();
+    // int ld = 0;
+    // while (!t.finished()) {
+    // }
+    // std::cout << "Timer has passed" << std::endl;
+
+    return 0;
 }

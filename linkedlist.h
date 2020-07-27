@@ -1,5 +1,5 @@
 //
-//  datatype.h
+//  linkedlist.h
 //  cpplib
 //
 //  Created by Niklas Tom Hucke on 24.07.2020.
@@ -9,29 +9,32 @@
 #include <stdexcept>
 #include <initializer_list>
 #include <string>
+#include <iostream>
 
 namespace nitohu {
-class IntArrayElement  {
+template<typename T>
+class LLElem  {
 public:
-    IntArrayElement() {}
-    IntArrayElement(int x) {
+    LLElem() {}
+    LLElem(T x) {
         this->value = x;
     }
 
-    int value;
-    IntArrayElement *next = nullptr;
-    IntArrayElement *prev = nullptr;
+    T value;
+    LLElem<T> *next = nullptr;
+    LLElem<T> *prev = nullptr;
 };
 
-class IntArray {
+template<typename T>
+class LinkedList {
 public:
-    IntArray() {}
-    IntArray(std::initializer_list<int> l) {
+    LinkedList() {}
+    LinkedList(std::initializer_list<T> l) {
         for (auto i = l.begin(); i != l.end(); i++) {
             this->append(*i);
         }
     }
-    ~IntArray() {
+    ~LinkedList() {
         while (this->tail->prev != nullptr) {
             this->tail = this->tail->prev;
             delete this->tail->next;
@@ -43,7 +46,7 @@ public:
     }
 
     void prepend(int x) {
-        IntArrayElement *e = new IntArrayElement(x);
+        LLElem<T> *e = new LLElem<T>(x);
         e->next = this->head;
         this->head->prev = e;
         this->head = e;
@@ -51,7 +54,7 @@ public:
     }
 
     void append(int x) {
-        IntArrayElement *e = new IntArrayElement(x);
+        LLElem<T> *e = new LLElem<T>(x);
         if (this->head == nullptr) {
             this->size = 1;
             this->head = e;
@@ -79,7 +82,7 @@ public:
         this->size--;
     }
 
-    void cut(unsigned int x, unsigned int y) {
+    void cut(size_t x, size_t y) {
         if (x > this->get_length() || y > this->get_length()) {
             throw "x or y is out of range.";
         }
@@ -89,11 +92,11 @@ public:
         if (x > y) {
             throw "x must be smaller than y.";
         }
-        IntArrayElement *e = this->head;
-        for (unsigned int i = 0; i < y; i++) {
+        LLElem<T> *e = this->head;
+        for (size_t i = 0; i < y; i++) {
             if (i >= x) {
-                IntArrayElement *prev = e->prev;
-                IntArrayElement *next = e->next;
+                LLElem<T> *prev = e->prev;
+                LLElem<T> *next = e->next;
                 if (prev == nullptr) {
                     this->head = next;
                 } else {
@@ -112,11 +115,11 @@ public:
         }
     }
 
-    int at(unsigned int i) {
+    T at(size_t i) const {
         if (i > this->size) {
             throw std::out_of_range("Index out of range.");
         }
-        IntArrayElement *e = this->head;
+        LLElem<T> *e = this->head;
         if (i <= (this->size / 2)) {
             e = this->head;
             for (int x = 0; x < i; x++) {
@@ -124,32 +127,40 @@ public:
             }
         } else {
             e = this->tail;
-            for (int x = 1; x < this->get_length()-i; x++) {
+            for (size_t x = 1; x < this->get_length()-i; x++) {
                 e = e->prev;
             }
         }
         return e->value;
     }
-    int get_length() { return this->size; }
+    size_t get_length() const { return this->size; }
 
-    int operator [](unsigned int i) {
+    T operator [](size_t i) const {
         return this->at(i);
     }
+
 private:
-    IntArrayElement *head = nullptr;
-    IntArrayElement *tail = nullptr;
-    int size = 0;
+    LLElem<T> *head = nullptr;
+    LLElem<T> *tail = nullptr;
+    size_t size = 0;
 };
 
-std::ostream& operator<<(std::ostream& o, IntArray *a) {
+template <typename T>
+std::ostream& operator<<(std::ostream& o, LinkedList<T> *a) {
     o << "{";
-    for(int i = 0; i < a->get_length(); i++) {
+    for(size_t i = 0; i < a->get_length(); i++) {
         o << a->at(i);
         if (i < (a->get_length()-1)) {
             o << ",";
         }
     }
     o << "}";
+    return o;
+}
+
+template<typename T>
+std::ostream& operator<<(std::ostream& o, LinkedList<T> a) {
+    o << &a;
     return o;
 }
 }
