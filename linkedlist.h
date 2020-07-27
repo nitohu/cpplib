@@ -11,6 +11,8 @@
 #include <string>
 #include <iostream>
 
+
+// This contains a dynamic "array" (with a LinkedList as a basis)
 namespace nitohu {
 template<typename T>
 class LLElem  {
@@ -145,12 +147,12 @@ private:
     size_t size = 0;
 };
 
-template <typename T>
-std::ostream& operator<<(std::ostream& o, LinkedList<T> *a) {
+template<typename T>
+std::ostream& operator<<(std::ostream& o, LinkedList<T> &a) {
     o << "{";
-    for(size_t i = 0; i < a->get_length(); i++) {
-        o << a->at(i);
-        if (i < (a->get_length()-1)) {
+    for(size_t i = 0; i < a.get_length(); i++) {
+        o << a.at(i);
+        if (i < (a.get_length()-1)) {
             o << ",";
         }
     }
@@ -158,9 +160,9 @@ std::ostream& operator<<(std::ostream& o, LinkedList<T> *a) {
     return o;
 }
 
-template<typename T>
-std::ostream& operator<<(std::ostream& o, LinkedList<T> a) {
-    o << &a;
+template <typename T>
+std::ostream& operator<<(std::ostream& o, LinkedList<T> *a) {
+    o << *a;
     return o;
 }
 }
