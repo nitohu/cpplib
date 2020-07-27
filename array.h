@@ -7,14 +7,34 @@
 //
 
 // This contains a fixed size array type
+#include <initializer_list>
+
 namespace nitohu {
 
 template<typename T, size_t S>
 class Array {
 public:
+    Array() {}
+    Array(std::initializer_list<T> l) {
+        int i = 0;
+        for (auto &it : l) {
+            this->arr[i] = it;
+            i++;
+        }
+    }
     constexpr size_t get_length() const { return S; }
 
+    constexpr const T* begin() const {
+        return (const int*)this->arr;
+    }
+    constexpr const T* end() const {
+        return (const int*) (this->arr + S);
+    }
+
     T& operator[](size_t i) {
+        return this->arr[i];
+    }
+    T operator[](size_t i) const {
         return this->arr[i];
     }
 private:

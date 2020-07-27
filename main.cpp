@@ -39,6 +39,15 @@ int main() {
         c[i] = i;
         std::cout << c[i] << std::endl;
     }
+    std::cout << "==== Constant Array\n";
+    Array<int, 2> *d = new Array<int, 2>{80, 50};
+    // d[0] = 20;          // Will throw an error
+    for (size_t i = 0; i < d->get_length(); i++) {
+        std::cout << (*d)[i] << std::endl;
+    }
+    for (auto &it : *d) {
+        std::cout << &it << ": " << it << std::endl;
+    }
 
     // std::cout << "===== Timer =====" << std::endl;
     // Timer
